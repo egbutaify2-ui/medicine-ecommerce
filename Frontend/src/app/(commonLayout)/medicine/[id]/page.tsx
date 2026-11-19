@@ -11,6 +11,7 @@ import {
 import OrderButtons from "../OrderButtons";
 import { userService } from "@/services/user.service";
 import ReviewFormModal from "@/components/layout/ReviewFormModal";
+import BackButton from "../BackButton";
 
 export default async function MedicinePage({ params }: { params: { id: string } }) {
     const { id } = await params;
@@ -43,6 +44,7 @@ export default async function MedicinePage({ params }: { params: { id: string } 
 
     return (
         <div className="w-full max-w-7xl mx-auto mb-10 pt-24 px-4">
+            <BackButton />
             <div className="bg-white dark:bg-zinc-950 rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.05)] overflow-hidden border border-slate-100 dark:border-zinc-800">
                 <div className="flex flex-col lg:flex-row">
 
