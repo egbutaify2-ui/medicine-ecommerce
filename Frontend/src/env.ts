@@ -3,13 +3,13 @@ import * as z from "zod";
 
 export const env = createEnv({
     server: {
-        BACKEND_URL: z.url(),
-        FRONTEND_URL: z.url(),
-        API_URL: z.url(),
-        AUTH_URL: z.url()
+        BACKEND_URL: z.url().default("https://medi-store-omega.vercel.app"),
+        FRONTEND_URL: z.url().default("http://localhost:3000"),
+        API_URL: z.url().default("https://medi-store-omega.vercel.app"),
+        AUTH_URL: z.url().default("http://localhost:3000")
     },
     client: {
-        NEXT_PUBLIC_TEST: z.string(),
+        NEXT_PUBLIC_TEST: z.string().default("local"),
     },
     runtimeEnv: {
         BACKEND_URL: process.env.BACKEND_URL,

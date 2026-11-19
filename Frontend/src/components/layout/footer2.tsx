@@ -17,11 +17,11 @@ const Footer2 = ({
     {
       title: "Shop by Category",
       links: [
-        { text: "Prescription Medicine", url: "/category/medicine" },
-        { text: "Baby & Mother Care", url: "/category/baby-mother-care" },
-        { text: "Diabetes Care", url: "/category/diabetes" },
-        { text: "Personal Care", url: "/category/personal-care" },
-        { text: "Wellness & Supplements", url: "/category/wellness" },
+        { text: "Prescription Medicine", url: "/" },
+        { text: "Baby & Mother Care", url: "/" },
+        { text: "Diabetes Care", url: "/" },
+        { text: "Personal Care", url: "/" },
+        { text: "Wellness & Supplements", url: "/" },
       ],
     },
     {
@@ -47,10 +47,10 @@ const Footer2 = ({
     {
       title: "Follow Us",
       links: [
-        { text: "Facebook", url: "#" },
-        { text: "Instagram", url: "#" },
-        { text: "Twitter (X)", url: "#" },
-        { text: "LinkedIn", url: "#" },
+        { text: "Facebook", url: "https://www.facebook.com/" },
+        { text: "Instagram", url: "https://www.instagram.com/" },
+        { text: "Twitter (X)", url: "https://x.com/" },
+        { text: "LinkedIn", url: "https://www.linkedin.com/" },
       ],
     },
   ],

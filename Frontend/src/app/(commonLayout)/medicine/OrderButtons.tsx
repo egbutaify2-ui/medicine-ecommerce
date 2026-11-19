@@ -24,10 +24,6 @@ export default function OrderButtons({
     const addItem = useCartStore((state: any) => state.addItem);
 
     const handleAddToCart = () => {
-        if (!isAuthenticated) {
-            toast.error("Please login to continue");
-            return router.push(`/login?callbackUrl=${encodeURIComponent(pathname)}`);
-        }
         if (!phone || !address) {
             return toast.error("Please provide both phone and address");
         }

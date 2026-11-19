@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/api/auth/:path*",
-        destination: `${process.env.PUBLIC_BACKEND_URL}/api/auth/:path*`,
+        destination: `${process.env.PUBLIC_BACKEND_URL || "https://medi-store-omega.vercel.app"}/api/auth/:path*`,
       },
     ];
   },

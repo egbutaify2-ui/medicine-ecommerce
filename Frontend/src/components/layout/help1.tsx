@@ -79,12 +79,12 @@ const MEDICINE_CATEGORIES: HelpCategory[] = [
 ];
 
 const POPULAR_PHARMACY_TOPICS: PopularTopic[] = [
-  { title: "How do I upload my doctor's prescription?", href: "#" },
-  { title: "Can I return a medicine if the seal is broken?", href: "#" },
-  { title: "Estimated delivery time for emergency medicines", href: "#" },
-  { title: "How to check the expiry date of my order?", href: "#" },
-  { title: "Payment methods for insurance claims", href: "#" },
-  { title: "Consult with a licensed pharmacist online", href: "#" },
+  { title: "How do I upload my doctor's prescription?", href: "/how-to-order" },
+  { title: "Can I return a medicine if the seal is broken?", href: "/refund-policy" },
+  { title: "Estimated delivery time for emergency medicines", href: "/shipping" },
+  { title: "How to check the expiry date of my order?", href: "/track-order" },
+  { title: "Payment methods for insurance claims", href: "/faq" },
+  { title: "Consult with a licensed pharmacist online", href: "/contact" },
 ];
 
 const Help1 = ({
@@ -177,12 +177,11 @@ const Help1 = ({
             Our licensed pharmacists are available 24/7 to answer your medical queries.
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-4">
-            <Button size="lg" className="bg-white text-blue-600 hover:bg-slate-100">
-              <PhoneCall className="mr-2 size-4" />
-              Call a Pharmacist
+            <Button asChild size="lg" className="bg-white text-blue-600 hover:bg-slate-100">
+              <a href="tel:+8801XXXXXX"><PhoneCall className="mr-2 size-4" />Call a Pharmacist</a>
             </Button>
-            <Button size="lg" variant="outline" className="border-white text-black hover:bg-blue-700">
-              Email Support
+            <Button asChild size="lg" variant="outline" className="border-white text-black hover:bg-blue-700">
+              <a href="mailto:support@medicare.com">Email Support</a>
             </Button>
           </div>
         </div>

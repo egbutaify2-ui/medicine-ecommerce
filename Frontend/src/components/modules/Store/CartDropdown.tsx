@@ -11,9 +11,11 @@ import {
 import { handleOrderAction } from "@/actions/order.actions";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { authClient } from "@/lib/auth-client";
 
 export function CartDropdown() {
     const router = useRouter();
+    const { data: session } = authClient.useSession();
     const { items, removeItem, clearCart } = useCartStore() as any;
 
     const subtotal = items.reduce(
@@ -31,6 +33,12 @@ export function CartDropdown() {
     const handleCheckout = async () => {
         if (items.length === 0) {
             return toast.error("Your cart is empty!");
+        }
+
+        if (!session) {
+            toast.error("Please login to place your order");
+            router.push("/login");
+            return;
         }
 
         const address = items[0]?.shippingAddress;
