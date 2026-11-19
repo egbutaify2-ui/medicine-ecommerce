@@ -93,7 +93,9 @@ export const mediService = {
 
     getMedicinesById: async function (id: string) {
         try {
-            const res = await fetch(`${API_URL}/api/medicines/${id}`);
+            const res = await fetch(`${API_URL}/api/medicines/${id}`, {
+                next: { revalidate: 60, tags: ['medicines'] },
+            });
 
             const data = await res.json();
 

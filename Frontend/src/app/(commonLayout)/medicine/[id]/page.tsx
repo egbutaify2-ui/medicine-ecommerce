@@ -14,23 +14,28 @@ import ReviewFormModal from "@/components/layout/ReviewFormModal";
 
 export default async function MedicinePage({ params }: { params: { id: string } }) {
     const { id } = await params;
-    const { data: medicineResponse } = await mediService.getMedicinesById(id);
-    const medi: Medicine = medicineResponse.data;
+    const [{ data: medicineResponse }, { data: session }] = await Promise.all([
+        mediService.getMedicinesById(id),
+        userService.getSession()
+    ]);
+    const medi: Medicine = medicineResponse?.data;
 
-    const { data: session } = await userService.getSession();
+    if (!medi) {
+        return (
+            <div className="min-h-[60vh] pt-32 px-4 text-center">
+                <h1 className="text-3xl font-bold">Medicine not found</h1>
+                <p className="mt-3 text-muted-foreground">The requested medicine is unavailable.</p>
+            </div>
+        );
+    }
+
     const sellerId = session?.user?.id;
     const isAuthenticated = !!session;
 
-    const { data: usersResponse } = await userService.getUsers();
-    const allUsers = Array.isArray(usersResponse?.data) ? usersResponse.data : (Array.isArray(usersResponse) ? usersResponse : []);
-
-    const reviewersDetails = medi?.reviews?.map((review: any) => {
-        const matchedUser = allUsers.find((user: any) => user.id === review.customerId);
-        return {
-            ...review,
-            userInfo: matchedUser || { name: "Verified User", image: null }
-        };
-    }) || [];
+    const reviewersDetails = medi?.reviews?.map((review: any) => ({
+        ...review,
+        userInfo: { name: "Verified User", image: null }
+    })) || [];
 
     const avgRating = medi.reviews?.length
         ? (medi.reviews.reduce((acc, curr) => acc + curr.rating, 0) / medi.reviews.length).toFixed(1)
