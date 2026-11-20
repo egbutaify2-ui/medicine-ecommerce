@@ -6,12 +6,16 @@ services:
     region: frankfurt
     rootDir: Backend
     buildCommand: npm ci --include=dev && npm run build
-    startCommand: npx prisma migrate deploy && npm start
+    startCommand: npx prisma migrate deploy && npm run seed:demo && npm start
     healthCheckPath: /
     autoDeploy: true
     envVars:
       - key: NODE_ENV
         value: production
+      - key: DEMO_MODE
+        value: "true"
+      - key: REQUIRE_EMAIL_VERIFICATION
+        value: "false"
       - key: DATABASE_URL
         fromDatabase:
           name: medicine-ecommerce-db
@@ -44,6 +48,10 @@ services:
         value: production
       - key: NEXT_TELEMETRY_DISABLED
         value: "1"
+      - key: NEXT_PUBLIC_GOOGLE_AUTH_ENABLED
+        value: "false"
+      - key: NEXT_PUBLIC_DEMO_MODE
+        value: "true"
       - key: BACKEND_URL
         fromService:
           type: web

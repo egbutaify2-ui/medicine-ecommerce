@@ -3,42 +3,37 @@ import type { NextRequest } from "next/server";
 import { userService } from "@/services/user.service";
 import { Roles } from "@/constants/roles";
 
+function dashboardForRole(role?: string) {
+  if (role === Roles.admin) return "/admin-dashboard";
+  if (role === Roles.seller) return "/seller-dashboard";
+  return "/customer-dashboard";
+}
+
 export async function proxy(request: NextRequest) {
-  const pathName = request.nextUrl.pathname;
-
+  const pathname = request.nextUrl.pathname;
   const { data } = await userService.getSession();
-  const isAuthenticated = !!data;
-  const role = data?.user?.role;
+  const user = data?.user;
+  const role = user?.role as string | undefined;
 
-  if (!isAuthenticated) {
+  if (!user) {
     const loginUrl = new URL("/login", request.url);
-    loginUrl.searchParams.set("callbackUrl", pathName);
+    loginUrl.searchParams.set("callbackUrl", pathname);
     return NextResponse.redirect(loginUrl);
   }
 
-  if (pathName === "/dashboard") {
-    if (role === Roles.admin) return NextResponse.redirect(new URL("/admin-dashboard", request.url));
-    if (role === Roles.seller) return NextResponse.redirect(new URL("/seller-dashboard", request.url));
-    return NextResponse.redirect(new URL("/customer-dashboard", request.url));
-  }
+  const destination = dashboardForRole(role);
+  const isAdminArea = pathname.startsWith("/admin-dashboard");
+  const isSellerArea = pathname.startsWith("/seller-dashboard");
+  const isCustomerArea = pathname.startsWith("/customer-dashboard");
 
-  if (pathName.startsWith("/admin-dashboard") && role !== Roles.admin) {
-    return NextResponse.redirect(new URL("/admin-dashboard", request.url));
-  }
-
-  if (pathName.startsWith("/seller-dashboard") && role !== Roles.seller) {
-    return NextResponse.redirect(new URL("/seller-dashboard", request.url));
-  }
+  if (isAdminArea && role !== Roles.admin) return NextResponse.redirect(new URL(destination, request.url));
+  if (isSellerArea && role !== Roles.seller && role !== Roles.admin) return NextResponse.redirect(new URL(destination, request.url));
+  if (isCustomerArea && role !== "CUSTOMER" && role !== Roles.admin) return NextResponse.redirect(new URL(destination, request.url));
+  if (pathname === "/dashboard") return NextResponse.redirect(new URL(destination, request.url));
 
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: [
-    "/dashboard",
-    "/admin-dashboard/:path*",
-    "/seller-dashboard/:path*",
-    "/customer-dashboard/:path*",
-    // "/medicine/:path*",
-  ],
+  matcher: ["/dashboard", "/admin-dashboard/:path*", "/seller-dashboard/:path*", "/customer-dashboard/:path*"],
 };

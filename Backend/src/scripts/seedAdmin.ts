@@ -1,50 +1,14 @@
-import { prisma } from "../lib/prisma"
-import { UserRole } from "../middlewares/auth"
+import { prisma } from "../lib/prisma";
 
-async function seedAdmin() {
-    try {
-
-        const adminData = {
-            name: "Admin hasan",
-            email: "adminhasan@gmail.com",
-            role: UserRole.ADMIN,
-            password: "admin123"
-        }
-
-        // check user exist on db or not
-        const existingUser = await prisma.user.findUnique({
-            where: {
-                email: adminData.email
-            }
-        });
-
-        if (existingUser) {
-            throw new Error("User already exists!!")
-        }
-
-        const signUpAdmin = await fetch("http://localhost:5000/api/auth/sign-up/email", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(adminData)
-        })
-
-       if(signUpAdmin.ok){
-         await prisma.user.update({
-            where:{
-                email: adminData.email
-            },
-            data:{
-                emailVerified:true
-            }
-         })
-       }
-
-        
-    } catch (error) {
-        console.error(error)
-    }
+async function promoteExistingUserToAdmin() {
+  const email = process.env.BOOTSTRAP_ADMIN_EMAIL?.trim().toLowerCase();
+  if (!email) throw new Error("Set BOOTSTRAP_ADMIN_EMAIL to an existing registered user's email before running this script.");
+  const user = await prisma.user.findUnique({ where: { email } });
+  if (!user) throw new Error("No account exists for BOOTSTRAP_ADMIN_EMAIL. Sign up first, then run this script.");
+  await prisma.user.update({ where: { id: user.id }, data: { role: "ADMIN", status: "ACTIVE", emailVerified: true } });
+  console.log(`Promoted the existing account ${email} to ADMIN.`);
 }
 
-seedAdmin();
+promoteExistingUserToAdmin()
+  .catch((error) => { console.error("Admin promotion failed:", error); process.exitCode = 1; })
+  .finally(async () => { await prisma.$disconnect(); });

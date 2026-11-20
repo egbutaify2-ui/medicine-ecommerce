@@ -1,52 +1,31 @@
 import { ShieldCheck, Truck, CreditCard } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { FallbackImage } from "@/components/ui/FallbackImage";
 
-interface HeroProps {
-  className?: string;
-}
-
-export default function HeroMedicine({ className }: HeroProps) {
+export default function HeroMedicine({ className }: { className?: string }) {
   return (
-    <section className={cn("relative w-full overflow-hidden bg-[#f8fafc] dark:bg-black ", className)}>
-      <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/4 bg-green-100 rounded-full blur-3xl opacity-50" />
-
-      <div className="container relative mx-auto px-4 pt-8 md:pt-30 ">
-        <div className="grid lg:grid-cols-2 md:gap-12 items-center">
-
+    <section className={cn("relative w-full overflow-hidden bg-[#f8fafc] dark:bg-black", className)}>
+      <div className="absolute -right-20 -top-24 h-80 w-80 rounded-full bg-green-100 blur-3xl opacity-60 dark:bg-green-900/20" />
+      <div className="container relative mx-auto px-4 pt-8 md:pt-30">
+        <div className="grid items-center gap-10 lg:grid-cols-2">
           <div className="space-y-8 animate-in fade-in slide-in-from-left duration-700">
-            <div className="inline-flex items-center gap-2 bg-green-100 text-green-700 px-4 py-1.5 rounded-full text-sm font-semibold border border-green-200">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-600"></span>
-              </span>
-              Online Pharmacy in Bangladesh
+            <div className="inline-flex items-center gap-2 rounded-full border border-green-200 bg-green-100 px-4 py-1.5 text-sm font-semibold text-green-700">
+              <span className="relative flex h-2 w-2"><span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" /><span className="relative inline-flex h-2 w-2 rounded-full bg-green-600" /></span>
+              Your online healthcare store
             </div>
-
             <div className="space-y-4">
-              <h1 className="text-4xl lg:text-7xl font-bold tracking-tight text-slate-900 leading-[1.1] dark:text-white">
-                Your Health, <br />
-                <span className="text-green-600">Our Priority.</span>
-              </h1>
-              <p className="text-slate-600 text-lg lg:text-xl max-w-lg leading-relaxed dark:text-white">
-                Order genuine medicines and healthcare essentials from the comfort of your home. Fast, secure, and reliable delivery.
-              </p>
+              <h1 className="text-4xl font-bold leading-[1.1] tracking-tight text-slate-900 dark:text-white lg:text-7xl">Your Health,<br /><span className="text-green-600">Our Priority.</span></h1>
+              <p className="max-w-lg text-lg leading-relaxed text-slate-600 dark:text-slate-300 lg:text-xl">Browse healthcare essentials, compare products and place an order from the comfort of your home.</p>
             </div>
-
-            <div className="flex flex-wrap gap-x-8 gap-y-4 pt-4 border-t border-slate-200 dark:text-white">
-              <FeatureItem icon={<ShieldCheck />} text="100% Authentic" />
-              <FeatureItem icon={<Truck />} text="Express Delivery" />
-              <FeatureItem icon={<CreditCard />} text="Secure Payment" />
+            <div className="flex flex-wrap gap-x-8 gap-y-4 border-t border-slate-200 pt-4 dark:border-slate-800">
+              <FeatureItem icon={<ShieldCheck />} text="Trusted products" />
+              <FeatureItem icon={<Truck />} text="Delivery options" />
+              <FeatureItem icon={<CreditCard />} text="Secure checkout" />
             </div>
           </div>
-
-          <div>
-            <img
-              src="https://i.ibb.co.com/FkVXLQXx/img.png"
-              alt="Healthcare"
-              className="md:w-175 md:h-175 object-cover"
-            />
+          <div className="mx-auto w-full max-w-[560px]">
+            <FallbackImage src="/images/medicine-hero.svg" alt="Illustration of a pharmacy bag and healthcare essentials" className="h-auto w-full object-contain" loading="eager" />
           </div>
-
         </div>
       </div>
     </section>
@@ -54,10 +33,5 @@ export default function HeroMedicine({ className }: HeroProps) {
 }
 
 function FeatureItem({ icon, text }: { icon: React.ReactNode; text: string }) {
-  return (
-    <div className="flex items-center gap-2 text-slate-700 font-medium">
-      <span className="text-green-600 size-5">{icon}</span>
-      <span className="text-sm dark:text-white">{text}</span>
-    </div>
-  );
+  return <div className="flex items-center gap-2 font-medium text-slate-700 dark:text-slate-200"><span className="size-5 text-green-600">{icon}</span><span className="text-sm">{text}</span></div>;
 }

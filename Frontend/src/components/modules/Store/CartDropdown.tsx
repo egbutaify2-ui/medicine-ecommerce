@@ -1,156 +1,97 @@
 "use client";
+
+import { useState } from "react";
 import { useCartStore } from "@/store/useCartStore";
 import { ShoppingCart, X, PackageSearch } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
-import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from "@/components/ui/popover";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { handleOrderAction } from "@/actions/order.actions";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
+import { FallbackImage } from "@/components/ui/FallbackImage";
 
 export function CartDropdown() {
-    const router = useRouter();
-    const { data: session } = authClient.useSession();
-    const { items, removeItem, clearCart } = useCartStore() as any;
+  const router = useRouter();
+  const { data: session } = authClient.useSession();
+  const { items, removeItem, clearCart } = useCartStore() as any;
+  const [address, setAddress] = useState("");
+  const [phone, setPhone] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const subtotal = items.reduce((sum: number, item: any) => sum + Number(item.price) * Number(item.qty || 1), 0);
+  const formatPrice = (price: number) => new Intl.NumberFormat("en-BD", { style: "currency", currency: "BDT" }).format(price);
 
-    const subtotal = items.reduce(
-        (sum: number, item: any) => sum + item.price * item.qty,
-        0
-    );
+  const handleCheckout = async () => {
+    if (!items.length) return toast.error("Your cart is empty.");
+    if (!session) {
+      toast.error("Please sign in to place your order.");
+      router.push(`/login?callbackUrl=${encodeURIComponent("/customer-dashboard/myOrders")}`);
+      return;
+    }
+    if (!address.trim() || !phone.trim()) return toast.error("Enter your delivery address and phone number.");
 
-    const formatPrice = (price: number) => {
-        return new Intl.NumberFormat("en-BD", {
-            style: "currency",
-            currency: "BDT",
-        }).format(price);
-    };
+    setIsSubmitting(true);
+    try {
+      const result = await handleOrderAction(items, address.trim(), phone.trim());
+      if (result.error) throw new Error(result.error);
+      clearCart();
+      setAddress("");
+      setPhone("");
+      toast.success("Order placed successfully.");
+      router.push("/customer-dashboard/myOrders");
+      router.refresh();
+    } catch (error: any) {
+      toast.error(`Order failed: ${error?.message || "Please try again."}`);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
-    const handleCheckout = async () => {
-        if (items.length === 0) {
-            return toast.error("Your cart is empty!");
-        }
-
-        if (!session) {
-            toast.error("Please login to place your order");
-            router.push("/login");
-            return;
-        }
-
-        const address = items[0]?.shippingAddress;
-        const phone = items[0]?.phoneNumber;
-
-        if (!address || !phone) {
-            return toast.error("Shipping address and phone number are required!");
-        }
-
-        toast.promise(handleOrderAction(items, address, phone), {
-            loading: 'Processing your order...',
-            success: (res) => {
-                if (res.error) throw new Error(res.error);
-
-                clearCart();
-                return "Order placed successfully! Redirecting...";
-            },
-            error: (err) => {
-                return `Order failed: ${err.message}`;
-            },
-        });
-    };
-
-    return (
-        <Popover>
-            <PopoverTrigger asChild>
-                <Button variant="outline" size="icon" className="relative">
-                    <ShoppingCart className="size-5" />
-                    {items.length > 0 && (
-                        <span className="absolute -top-1 -right-1 bg-blue-600 text-white text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center">
-                            {items.length}
-                        </span>
-                    )}
-                </Button>
-            </PopoverTrigger>
-
-            <PopoverContent className="w-96 p-5 mr-4 rounded-xl shadow-xl" align="end">
-                <h2 className="text-lg font-semibold mb-4 text-slate-800">Shopping Cart</h2>
-
-                {items.length === 0 ? (
-                    <div className="py-10 text-center space-y-3">
-                        <p className="text-sm text-muted-foreground font-medium">Your cart is empty</p>
-                        <Button
-                            className="w-full rounded-xl gap-2 font-bold"
-                            variant="outline"
-                            onClick={() => router.push("/customer-dashboard/myOrders")}
-                        >
-                            <PackageSearch className="size-4" />
-                            View Previous Orders
-                        </Button>
-                    </div>
-                ) : (
-                    <div className="space-y-4">
-                        <div className="space-y-3 max-h-80 overflow-y-auto pr-1">
-                            {items.map((item: any) => (
-                                <div
-                                    key={item.id}
-                                    className="flex items-center gap-3 border rounded-lg p-2 hover:bg-slate-50 transition"
-                                >
-                                    <div className="h-16 w-16 shrink-0 overflow-hidden rounded-lg border bg-slate-50">
-                                        <img
-                                            src={item.image || "/api/placeholder/64/64"}
-                                            alt={item.name}
-                                            className="h-full w-full object-cover"
-                                        />
-                                    </div>
-
-                                    <div className="flex-1 min-w-0">
-                                        <h4 className="text-sm font-bold truncate text-slate-800">{item.name}</h4>
-                                        <p className="text-[11px] font-medium text-slate-400">Qty: {item.qty}</p>
-                                        <p className="text-sm font-bold text-blue-600">{formatPrice(item.price * item.qty)}</p>
-                                    </div>
-
-                                    <Button
-                                        size="icon"
-                                        variant="ghost"
-                                        className="rounded-full size-8 hover:bg-red-50 hover:text-red-500"
-                                        onClick={() => removeItem(item.id)}
-                                    >
-                                        <X className="size-4" />
-                                    </Button>
-                                </div>
-                            ))}
-                        </div>
-
-                        <Separator className="bg-slate-100" />
-
-                        <div className="flex justify-between items-center py-2">
-                            <span className="text-sm font-bold text-slate-500 uppercase">Total</span>
-                            <span className="text-lg font-black text-slate-900">{formatPrice(subtotal)}</span>
-                        </div>
-
-                        <div className="flex flex-col gap-2">
-                            <Button
-                                className="w-full rounded-xl bg-blue-600 hover:bg-blue-700 font-bold h-11"
-                                onClick={handleCheckout}
-                            >
-                                Order Now
-                            </Button>
-
-                            <Button
-                                variant="outline"
-                                className="w-full rounded-xl gap-2 font-bold text-slate-500"
-                                onClick={() => router.push("/dashboard/orders")}
-                            >
-                                <PackageSearch className="size-4" />
-                                Order History
-                            </Button>
-                        </div>
-                    </div>
-                )}
-            </PopoverContent>
-        </Popover>
-    );
+  return (
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button variant="outline" size="icon" className="relative" aria-label="Open shopping cart">
+          <ShoppingCart className="size-5" />
+          {items.length > 0 && <span className="absolute -right-1 -top-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-blue-600 px-1 text-[10px] font-bold text-white">{items.reduce((n: number, item: any) => n + Number(item.qty || 1), 0)}</span>}
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="mr-4 w-[min(24rem,calc(100vw-1.5rem))] rounded-xl p-5 shadow-xl" align="end">
+        <h2 className="mb-4 text-lg font-semibold text-slate-800 dark:text-slate-100">Shopping Cart</h2>
+        {!items.length ? (
+          <div className="space-y-3 py-8 text-center">
+            <p className="text-sm font-medium text-muted-foreground">Your cart is empty.</p>
+            <Button className="w-full gap-2 rounded-xl" variant="outline" onClick={() => router.push("/customer-dashboard/myOrders")}><PackageSearch className="size-4" /> View previous orders</Button>
+          </div>
+        ) : (
+          <div className="space-y-4">
+            <div className="max-h-64 space-y-3 overflow-y-auto pr-1">
+              {items.map((item: any) => (
+                <div key={item.id} className="flex items-center gap-3 rounded-lg border p-2">
+                  <div className="h-16 w-16 shrink-0 overflow-hidden rounded-lg border bg-slate-50"><FallbackImage src={item.image} alt={item.name} className="h-full w-full object-contain" /></div>
+                  <div className="min-w-0 flex-1">
+                    <h4 className="truncate text-sm font-bold text-slate-800 dark:text-slate-100">{item.name}</h4>
+                    <p className="text-[11px] font-medium text-slate-400">Qty: {item.qty}</p>
+                    <p className="text-sm font-bold text-blue-600">{formatPrice(Number(item.price) * Number(item.qty || 1))}</p>
+                  </div>
+                  <Button size="icon" variant="ghost" className="size-8 rounded-full hover:bg-red-50 hover:text-red-500" onClick={() => removeItem(item.id)} aria-label={`Remove ${item.name}`}><X className="size-4" /></Button>
+                </div>
+              ))}
+            </div>
+            <Separator />
+            <div className="flex items-center justify-between py-1"><span className="text-xs font-bold uppercase text-slate-500">Subtotal</span><span className="text-lg font-black text-slate-900 dark:text-white">{formatPrice(subtotal)}</span></div>
+            <div className="space-y-3">
+              <div><label htmlFor="checkout-address" className="mb-1 block text-xs font-semibold text-slate-600">Delivery address</label><Input id="checkout-address" value={address} onChange={(event) => setAddress(event.target.value)} placeholder="House, street, city" /></div>
+              <div><label htmlFor="checkout-phone" className="mb-1 block text-xs font-semibold text-slate-600">Phone number</label><Input id="checkout-phone" type="tel" value={phone} onChange={(event) => setPhone(event.target.value)} placeholder="Your contact number" /></div>
+            </div>
+            <div className="flex flex-col gap-2">
+              <Button className="h-11 w-full rounded-xl bg-blue-600 font-bold hover:bg-blue-700" onClick={handleCheckout} disabled={isSubmitting}>{isSubmitting ? "Placing order..." : session ? "Place order" : "Sign in to checkout"}</Button>
+              <Button variant="outline" className="w-full gap-2 rounded-xl font-bold text-slate-500" onClick={() => router.push("/customer-dashboard/myOrders")}><PackageSearch className="size-4" /> Order history</Button>
+            </div>
+          </div>
+        )}
+      </PopoverContent>
+    </Popover>
+  );
 }
