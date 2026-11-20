@@ -5,7 +5,7 @@ services:
     plan: free
     region: frankfurt
     rootDir: Backend
-    buildCommand: npm ci && npm run build
+    buildCommand: npm ci --include=dev && npm run build
     startCommand: npx prisma migrate deploy && npm start
     healthCheckPath: /
     autoDeploy: true
@@ -35,7 +35,7 @@ services:
     plan: free
     region: frankfurt
     rootDir: Frontend
-    buildCommand: npm ci && npm run build
+    buildCommand: npm ci --include=dev && npm run build
     startCommand: npm start
     healthCheckPath: /
     autoDeploy: true
