@@ -80,17 +80,9 @@ export default async function Home({
       <div className="container mx-auto px-4 pb-10">
         <section className="mt-8 w-full">
           <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
-            <div className="flex items-center gap-4">
-              <h2 className="text-xl font-bold text-slate-800 dark:text-slate-100">
-                {search ? "Products matching " + '"' + search + '"' : "Products"}
-              </h2>
-              <Link
-                href={allProductsHref}
-                className="inline-flex items-center gap-1 text-sm font-bold text-blue-600 transition-colors hover:text-blue-700 hover:underline"
-              >
-                View More <ArrowRight className="size-4" />
-              </Link>
-            </div>
+            <h2 className="text-xl font-bold text-slate-800 dark:text-slate-100">
+              {search ? "Products matching " + '"' + search + '"' : "Products"}
+            </h2>
             <span className="rounded-full bg-blue-50 px-4 py-1.5 text-sm font-bold text-blue-600 dark:bg-blue-900/20">
               {catalogueError ? "Catalogue unavailable" : meta.total + " items"}
             </span>
@@ -121,6 +113,17 @@ export default async function Home({
                   Browse all products
                 </Link>
               )}
+            </div>
+          )}
+
+          {!catalogueError && medicines.length > 0 && (
+            <div className="mt-8 flex justify-center">
+              <Link
+                href={allProductsHref}
+                className="inline-flex items-center gap-2 rounded-full bg-blue-600 px-6 py-3 text-sm font-bold text-white shadow-sm transition-colors hover:bg-blue-700"
+              >
+                View More Products <ArrowRight className="size-4" />
+              </Link>
             </div>
           )}
         </section>
