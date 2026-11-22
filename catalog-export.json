@@ -1,0 +1,467 @@
+{
+  "source": {
+    "medicines": "https://medi-store-omega.vercel.app/api/medicines?page=1&limit=100",
+    "categories": "https://medi-store-omega.vercel.app/category",
+    "exportedAt": "2026-11-22T13:56:19.609Z"
+  },
+  "categories": [
+    {
+      "id": "90948860-71c7-458c-a6b4-9b539386619c",
+      "categoryName": "Dermatology",
+      "description": "Topical and systemic medications used to treat skin conditions like eczema, psoriasis, and infections.",
+      "createdAt": "2026-02-13T18:53:05.957Z",
+      "updatedAt": "2026-02-13T18:53:05.957Z"
+    },
+    {
+      "id": "13633eb2-dd3a-4e39-96dd-0f9b327e8e7b",
+      "categoryName": "Neurology",
+      "description": "Drugs targeting the central nervous system to treat epilepsy, Parkinson's, and other neurological disorders.",
+      "createdAt": "2026-02-13T18:52:52.287Z",
+      "updatedAt": "2026-02-13T18:52:52.287Z"
+    },
+    {
+      "id": "1f7c5f8e-f8db-4ce2-8b9c-f79cee26c276",
+      "categoryName": "Respiratory",
+      "description": "Medicines for the treatment of asthma, COPD, and other lung-related conditions.",
+      "createdAt": "2026-02-13T18:52:38.141Z",
+      "updatedAt": "2026-02-13T18:52:38.141Z"
+    },
+    {
+      "id": "9afb79b6-bc76-49e6-a626-b673f3453fc1",
+      "categoryName": "Gastrointestinal",
+      "description": "Treatments for digestive system disorders, including acidity, ulcers, and irritable bowel syndrome.",
+      "createdAt": "2026-02-13T18:52:13.820Z",
+      "updatedAt": "2026-02-13T18:52:13.820Z"
+    },
+    {
+      "id": "5ee40efa-d620-45bc-b429-cf4cb81eb476",
+      "categoryName": "Antibiotics",
+      "description": "Medicines that inhibit the growth of or destroy microorganisms, used to treat bacterial infections.",
+      "createdAt": "2026-02-13T18:51:50.147Z",
+      "updatedAt": "2026-02-13T18:51:50.147Z"
+    },
+    {
+      "id": "625549a5-c9bd-4c5d-a016-c2ebc9101a33",
+      "categoryName": "Analgesic & Antipyretic",
+      "description": "Medications designed to relieve various types of pain and reduce fever.",
+      "createdAt": "2026-02-13T18:51:34.030Z",
+      "updatedAt": "2026-02-13T18:51:34.030Z"
+    },
+    {
+      "id": "05c72239-c16e-4e24-87e2-722d733da614",
+      "categoryName": "Cardiovascular",
+      "description": "Drugs used to treat conditions of the heart and blood vessels, such as hypertension, heart failure, and high cholesterol.",
+      "createdAt": "2026-02-13T18:51:17.563Z",
+      "updatedAt": "2026-02-13T18:51:17.563Z"
+    },
+    {
+      "id": "cb76378c-fb70-4dbc-9716-b30349199ce9",
+      "categoryName": "Endocrine",
+      "description": "Medicines used to manage hormonal disorders including diabetes, thyroid diseases, and adrenal gland conditions.",
+      "createdAt": "2026-02-13T18:50:56.972Z",
+      "updatedAt": "2026-02-13T18:50:56.972Z"
+    }
+  ],
+  "medicines": [
+    {
+      "id": "a7e0258a-67b9-4c8a-8d05-62be6694d730",
+      "name": "Napa Extra",
+      "description": "Napa Extra , Square Pharmaceuticals conpany",
+      "price": 20,
+      "stock": 50,
+      "image": "https://i.ibb.co.com/My5ztTHB/Custom-Pill-Packaging-Boxes.jpg",
+      "manufacturer": "Square Pharmaceuticals",
+      "isActive": true,
+      "categoryId": "90948860-71c7-458c-a6b4-9b539386619c",
+      "category": {
+        "id": "90948860-71c7-458c-a6b4-9b539386619c",
+        "categoryName": "Dermatology",
+        "description": "Topical and systemic medications used to treat skin conditions like eczema, psoriasis, and infections.",
+        "createdAt": "2026-02-13T18:53:05.957Z",
+        "updatedAt": "2026-02-13T18:53:05.957Z"
+      },
+      "createdAt": "2026-04-10T19:29:59.128Z",
+      "updatedAt": "2026-04-10T19:29:59.128Z"
+    },
+    {
+      "id": "c45b5da0-b9ba-47df-b870-44484273b2b0",
+      "name": "Atova 10",
+      "description": "Atorvastatin for heart health.",
+      "price": 200,
+      "stock": 200,
+      "image": "https://i.ibb.co.com/PzwzgFrt/Atova-10.png",
+      "manufacturer": "Square Pharmaceuticals",
+      "isActive": true,
+      "categoryId": "05c72239-c16e-4e24-87e2-722d733da614",
+      "category": {
+        "id": "05c72239-c16e-4e24-87e2-722d733da614",
+        "categoryName": "Cardiovascular",
+        "description": "Drugs used to treat conditions of the heart and blood vessels, such as hypertension, heart failure, and high cholesterol.",
+        "createdAt": "2026-02-13T18:51:17.563Z",
+        "updatedAt": "2026-02-13T18:51:17.563Z"
+      },
+      "createdAt": "2026-02-13T19:47:27.669Z",
+      "updatedAt": "2026-04-12T17:30:27.609Z"
+    },
+    {
+      "id": "75cf7cd6-e3aa-4188-a263-dffa064cfcbc",
+      "name": "Xeldrin",
+      "description": "Cough syrup for relief of cough.",
+      "price": 85,
+      "stock": 100,
+      "image": "https://i.ibb.co.com/Rxc48vk/Xeldrin.png",
+      "manufacturer": "Opsonin Pharma",
+      "isActive": true,
+      "categoryId": "1f7c5f8e-f8db-4ce2-8b9c-f79cee26c276",
+      "category": {
+        "id": "1f7c5f8e-f8db-4ce2-8b9c-f79cee26c276",
+        "categoryName": "Respiratory",
+        "description": "Medicines for the treatment of asthma, COPD, and other lung-related conditions.",
+        "createdAt": "2026-02-13T18:52:38.141Z",
+        "updatedAt": "2026-02-13T18:52:38.141Z"
+      },
+      "createdAt": "2026-02-13T19:46:05.535Z",
+      "updatedAt": "2026-02-13T19:46:05.535Z"
+    },
+    {
+      "id": "0e299627-12fc-406a-9eb6-433915417120",
+      "name": "Flamex 400",
+      "description": "Ibuprofen for reducing inflammation.",
+      "price": 30,
+      "stock": 350,
+      "image": "https://i.ibb.co.com/prXPFSRb/Flamex-400.jpg",
+      "manufacturer": "Renata Limited",
+      "isActive": true,
+      "categoryId": "625549a5-c9bd-4c5d-a016-c2ebc9101a33",
+      "category": {
+        "id": "625549a5-c9bd-4c5d-a016-c2ebc9101a33",
+        "categoryName": "Analgesic & Antipyretic",
+        "description": "Medications designed to relieve various types of pain and reduce fever.",
+        "createdAt": "2026-02-13T18:51:34.030Z",
+        "updatedAt": "2026-02-13T18:51:34.030Z"
+      },
+      "createdAt": "2026-02-13T19:44:36.733Z",
+      "updatedAt": "2026-02-13T19:44:36.733Z"
+    },
+    {
+      "id": "aed9d3b7-62e5-431f-8b50-0d59733f79f6",
+      "name": "Tofen 1mg",
+      "description": "Ketotifen for allergy prevention.",
+      "price": 90,
+      "stock": 140,
+      "image": "https://i.ibb.co.com/HfTyKxMD/image-removebg-preview-3.png",
+      "manufacturer": "Acme Laboratories",
+      "isActive": true,
+      "categoryId": "1f7c5f8e-f8db-4ce2-8b9c-f79cee26c276",
+      "category": {
+        "id": "1f7c5f8e-f8db-4ce2-8b9c-f79cee26c276",
+        "categoryName": "Respiratory",
+        "description": "Medicines for the treatment of asthma, COPD, and other lung-related conditions.",
+        "createdAt": "2026-02-13T18:52:38.141Z",
+        "updatedAt": "2026-02-13T18:52:38.141Z"
+      },
+      "createdAt": "2026-02-13T19:41:29.582Z",
+      "updatedAt": "2026-02-13T19:41:29.582Z"
+    },
+    {
+      "id": "19ae8d72-5d37-4fd2-880b-b862a91edf6f",
+      "name": "Almex 400",
+      "description": "Albendazole for treating worms.",
+      "price": 25,
+      "stock": 400,
+      "image": "https://i.ibb.co.com/FbZXM9Vh/Almex.jpg",
+      "manufacturer": "Square Pharmaceuticals",
+      "isActive": true,
+      "categoryId": "9afb79b6-bc76-49e6-a626-b673f3453fc1",
+      "category": {
+        "id": "9afb79b6-bc76-49e6-a626-b673f3453fc1",
+        "categoryName": "Gastrointestinal",
+        "description": "Treatments for digestive system disorders, including acidity, ulcers, and irritable bowel syndrome.",
+        "createdAt": "2026-02-13T18:52:13.820Z",
+        "updatedAt": "2026-02-13T18:52:13.820Z"
+      },
+      "createdAt": "2026-02-13T19:37:51.714Z",
+      "updatedAt": "2026-02-13T19:37:51.714Z"
+    },
+    {
+      "id": "dd3fadec-69a5-40c2-9d52-147df836cdb4",
+      "name": "Ciprocin 500",
+      "description": "Ciprofloxacin for bacterial infections.",
+      "price": 180,
+      "stock": 150,
+      "image": "https://i.ibb.co.com/PsyBQ4dd/Ciprocin-500.png",
+      "manufacturer": "Square Pharmaceuticals",
+      "isActive": true,
+      "categoryId": "5ee40efa-d620-45bc-b429-cf4cb81eb476",
+      "category": {
+        "id": "5ee40efa-d620-45bc-b429-cf4cb81eb476",
+        "categoryName": "Antibiotics",
+        "description": "Medicines that inhibit the growth of or destroy microorganisms, used to treat bacterial infections.",
+        "createdAt": "2026-02-13T18:51:50.147Z",
+        "updatedAt": "2026-02-13T18:51:50.147Z"
+      },
+      "createdAt": "2026-02-13T19:35:24.707Z",
+      "updatedAt": "2026-02-13T19:35:24.707Z"
+    },
+    {
+      "id": "2f0b7822-f9fb-4c0d-aea8-d825a1674a32",
+      "name": "Ace Plus",
+      "description": "Paracetamol and Caffeine for pain.",
+      "price": 25,
+      "stock": 450,
+      "image": "https://i.ibb.co.com/gbBPvmgW/ace-syrup-100ml-1-pc.jpg",
+      "manufacturer": "Square Pharmaceuticals",
+      "isActive": true,
+      "categoryId": "625549a5-c9bd-4c5d-a016-c2ebc9101a33",
+      "category": {
+        "id": "625549a5-c9bd-4c5d-a016-c2ebc9101a33",
+        "categoryName": "Analgesic & Antipyretic",
+        "description": "Medications designed to relieve various types of pain and reduce fever.",
+        "createdAt": "2026-02-13T18:51:34.030Z",
+        "updatedAt": "2026-02-13T18:51:34.030Z"
+      },
+      "createdAt": "2026-02-13T19:33:43.169Z",
+      "updatedAt": "2026-02-13T19:33:43.169Z"
+    },
+    {
+      "id": "2677a22c-b909-4567-b0c6-29a4d52fab15",
+      "name": "Glimaryl 1mg",
+      "description": "Glimepiride for controlling blood sugar.",
+      "price": 140,
+      "stock": 120,
+      "image": "https://i.ibb.co.com/Kp8SX2tX/GLIMARYL-1-M-2-M.jpg",
+      "manufacturer": "Beximco Pharma",
+      "isActive": true,
+      "categoryId": "cb76378c-fb70-4dbc-9716-b30349199ce9",
+      "category": {
+        "id": "cb76378c-fb70-4dbc-9716-b30349199ce9",
+        "categoryName": "Endocrine",
+        "description": "Medicines used to manage hormonal disorders including diabetes, thyroid diseases, and adrenal gland conditions.",
+        "createdAt": "2026-02-13T18:50:56.972Z",
+        "updatedAt": "2026-02-13T18:50:56.972Z"
+      },
+      "createdAt": "2026-02-13T19:32:40.666Z",
+      "updatedAt": "2026-02-13T19:32:40.666Z"
+    },
+    {
+      "id": "3a4fe5d7-750d-413b-8615-24debd65cb42",
+      "name": "Ecosprin 75",
+      "description": "Aspirin for prevention of heart attack.",
+      "price": 45,
+      "stock": 400,
+      "image": "https://i.ibb.co.com/3YFn08CH/ecosprin-75-mg-tablet-30523333765-i1-MUz-Gt-Asln-SD2-Qcm46b-Km.jpg",
+      "manufacturer": "Acme Laboratories",
+      "isActive": true,
+      "categoryId": "05c72239-c16e-4e24-87e2-722d733da614",
+      "category": {
+        "id": "05c72239-c16e-4e24-87e2-722d733da614",
+        "categoryName": "Cardiovascular",
+        "description": "Drugs used to treat conditions of the heart and blood vessels, such as hypertension, heart failure, and high cholesterol.",
+        "createdAt": "2026-02-13T18:51:17.563Z",
+        "updatedAt": "2026-02-13T18:51:17.563Z"
+      },
+      "createdAt": "2026-02-13T19:31:34.700Z",
+      "updatedAt": "2026-02-13T19:31:34.700Z"
+    },
+    {
+      "id": "285d8b26-838d-48cd-8b9a-0ae250de6191",
+      "name": "Betnovate-N",
+      "description": "Corticosteroid cream for skin conditions.",
+      "price": 65,
+      "stock": 110,
+      "image": "https://i.ibb.co.com/0xKHxXr/Betnovate-N-Skin-Cream.jpg",
+      "manufacturer": "GSK",
+      "isActive": true,
+      "categoryId": "90948860-71c7-458c-a6b4-9b539386619c",
+      "category": {
+        "id": "90948860-71c7-458c-a6b4-9b539386619c",
+        "categoryName": "Dermatology",
+        "description": "Topical and systemic medications used to treat skin conditions like eczema, psoriasis, and infections.",
+        "createdAt": "2026-02-13T18:53:05.957Z",
+        "updatedAt": "2026-02-13T18:53:05.957Z"
+      },
+      "createdAt": "2026-02-13T19:30:26.326Z",
+      "updatedAt": "2026-02-13T19:30:26.326Z"
+    },
+    {
+      "id": "636dd67d-635b-477d-8b35-ccb01b936a94",
+      "name": "Pregaba 75",
+      "description": "Pregabalin for neuropathic pain and nerve damage.",
+      "price": 350,
+      "stock": 65,
+      "image": "https://i.ibb.co.com/nMRnyxzh/Pregaba-75.png",
+      "manufacturer": "Incepta Pharma",
+      "isActive": true,
+      "categoryId": "13633eb2-dd3a-4e39-96dd-0f9b327e8e7b",
+      "category": {
+        "id": "13633eb2-dd3a-4e39-96dd-0f9b327e8e7b",
+        "categoryName": "Neurology",
+        "description": "Drugs targeting the central nervous system to treat epilepsy, Parkinson's, and other neurological disorders.",
+        "createdAt": "2026-02-13T18:52:52.287Z",
+        "updatedAt": "2026-02-13T18:52:52.287Z"
+      },
+      "createdAt": "2026-02-13T19:29:03.349Z",
+      "updatedAt": "2026-02-13T19:29:03.349Z"
+    },
+    {
+      "id": "c879f314-6e0e-42ad-b872-13fc83dc7f1c",
+      "name": "Ventolin Inhaler",
+      "description": "Salbutamol for immediate bronchodilation.",
+      "price": 260,
+      "stock": 50,
+      "image": "https://i.ibb.co.com/5hJwrYcY/360-F-306275535-d1-XMtad-KAZ9-N9-FCbgw0-Tyoz5w4s-Tk-Q6-E.jpg",
+      "manufacturer": "GSK",
+      "isActive": true,
+      "categoryId": "1f7c5f8e-f8db-4ce2-8b9c-f79cee26c276",
+      "category": {
+        "id": "1f7c5f8e-f8db-4ce2-8b9c-f79cee26c276",
+        "categoryName": "Respiratory",
+        "description": "Medicines for the treatment of asthma, COPD, and other lung-related conditions.",
+        "createdAt": "2026-02-13T18:52:38.141Z",
+        "updatedAt": "2026-02-13T18:52:38.141Z"
+      },
+      "createdAt": "2026-02-13T19:27:05.168Z",
+      "updatedAt": "2026-02-13T19:27:05.168Z"
+    },
+    {
+      "id": "10437e4d-b60d-4ada-9c08-3769ebe80be1",
+      "name": "Entacyd Plus",
+      "description": "Antacid suspension for quick relief of gas and acidity.",
+      "price": 95,
+      "stock": 120,
+      "image": "https://i.ibb.co.com/r2Kn9xGb/ENTACYD-PLUS.jpg",
+      "manufacturer": "Square Pharmaceuticals",
+      "isActive": true,
+      "categoryId": "9afb79b6-bc76-49e6-a626-b673f3453fc1",
+      "category": {
+        "id": "9afb79b6-bc76-49e6-a626-b673f3453fc1",
+        "categoryName": "Gastrointestinal",
+        "description": "Treatments for digestive system disorders, including acidity, ulcers, and irritable bowel syndrome.",
+        "createdAt": "2026-02-13T18:52:13.820Z",
+        "updatedAt": "2026-02-13T18:52:13.820Z"
+      },
+      "createdAt": "2026-02-13T19:25:25.457Z",
+      "updatedAt": "2026-02-13T19:25:25.457Z"
+    },
+    {
+      "id": "a3129e19-cc8d-4bb5-b374-7fdff661a9b1",
+      "name": "Fixit 200",
+      "description": "Cefixime for urinary tract infections.",
+      "price": 400,
+      "stock": 70,
+      "image": "https://i.ibb.co.com/pj173NvF/fixitis-200-lb-tab-with-strip-packing.png",
+      "manufacturer": "Incepta Pharma",
+      "isActive": true,
+      "categoryId": "5ee40efa-d620-45bc-b429-cf4cb81eb476",
+      "category": {
+        "id": "5ee40efa-d620-45bc-b429-cf4cb81eb476",
+        "categoryName": "Antibiotics",
+        "description": "Medicines that inhibit the growth of or destroy microorganisms, used to treat bacterial infections.",
+        "createdAt": "2026-02-13T18:51:50.147Z",
+        "updatedAt": "2026-02-13T18:51:50.147Z"
+      },
+      "createdAt": "2026-02-13T19:24:10.959Z",
+      "updatedAt": "2026-02-13T19:24:10.959Z"
+    },
+    {
+      "id": "2ef1c565-d83f-42af-ada5-3d707bfe8879",
+      "name": "Rosuva 10",
+      "description": "Rosuvastatin to lower high cholesterol levels.",
+      "price": 220,
+      "stock": 180,
+      "image": "https://i.ibb.co.com/d0t0vDP6/image-removebg-preview-2.png",
+      "manufacturer": "Beximco Pharma",
+      "isActive": true,
+      "categoryId": "05c72239-c16e-4e24-87e2-722d733da614",
+      "category": {
+        "id": "05c72239-c16e-4e24-87e2-722d733da614",
+        "categoryName": "Cardiovascular",
+        "description": "Drugs used to treat conditions of the heart and blood vessels, such as hypertension, heart failure, and high cholesterol.",
+        "createdAt": "2026-02-13T18:51:17.563Z",
+        "updatedAt": "2026-02-13T18:51:17.563Z"
+      },
+      "createdAt": "2026-02-13T19:18:39.501Z",
+      "updatedAt": "2026-02-13T19:18:39.501Z"
+    },
+    {
+      "id": "a73c6020-c64b-45b6-a930-63033d8d82c9",
+      "name": "Metfor 500",
+      "description": "Metformin for blood sugar management in type 2 diabetes.",
+      "price": 150,
+      "stock": 300,
+      "image": "https://i.ibb.co.com/Q7HVZB6s/Metfor-500.png",
+      "manufacturer": "Incepta Pharma",
+      "isActive": true,
+      "categoryId": "cb76378c-fb70-4dbc-9716-b30349199ce9",
+      "category": {
+        "id": "cb76378c-fb70-4dbc-9716-b30349199ce9",
+        "categoryName": "Endocrine",
+        "description": "Medicines used to manage hormonal disorders including diabetes, thyroid diseases, and adrenal gland conditions.",
+        "createdAt": "2026-02-13T18:50:56.972Z",
+        "updatedAt": "2026-02-13T18:50:56.972Z"
+      },
+      "createdAt": "2026-02-13T19:16:18.870Z",
+      "updatedAt": "2026-02-13T19:16:18.870Z"
+    },
+    {
+      "id": "aec8f6ac-c7dc-42fb-8070-82cc87e49d8d",
+      "name": "Pevison Cream",
+      "description": "Antifungal and anti-inflammatory cream for skin infections.",
+      "price": 120,
+      "stock": 90,
+      "image": "https://i.ibb.co.com/s9ngy288/Pevison-Cream.png",
+      "manufacturer": "Incepta Pharma",
+      "isActive": true,
+      "categoryId": "90948860-71c7-458c-a6b4-9b539386619c",
+      "category": {
+        "id": "90948860-71c7-458c-a6b4-9b539386619c",
+        "categoryName": "Dermatology",
+        "description": "Topical and systemic medications used to treat skin conditions like eczema, psoriasis, and infections.",
+        "createdAt": "2026-02-13T18:53:05.957Z",
+        "updatedAt": "2026-02-13T18:53:05.957Z"
+      },
+      "createdAt": "2026-02-13T19:13:48.041Z",
+      "updatedAt": "2026-02-13T19:13:48.041Z"
+    },
+    {
+      "id": "a748ad69-c2dd-405d-8335-38f8467d82cc",
+      "name": "Rivolta 2",
+      "description": "Clonazepam for anxiety and seizure disorders.",
+      "price": 80,
+      "stock": 150,
+      "image": "https://i.ibb.co.com/dqgXzGX/Rivolta-2-removebg-preview.png",
+      "manufacturer": "Square Pharmaceuticals",
+      "isActive": true,
+      "categoryId": "13633eb2-dd3a-4e39-96dd-0f9b327e8e7b",
+      "category": {
+        "id": "13633eb2-dd3a-4e39-96dd-0f9b327e8e7b",
+        "categoryName": "Neurology",
+        "description": "Drugs targeting the central nervous system to treat epilepsy, Parkinson's, and other neurological disorders.",
+        "createdAt": "2026-02-13T18:52:52.287Z",
+        "updatedAt": "2026-02-13T18:52:52.287Z"
+      },
+      "createdAt": "2026-02-13T19:06:01.827Z",
+      "updatedAt": "2026-02-13T19:08:08.195Z"
+    },
+    {
+      "id": "d685003a-44d0-470b-8e9f-9176a14bb467",
+      "name": "Napa Extend",
+      "description": "Paracetamol for long-lasting relief of pain and fever.",
+      "price": 20,
+      "stock": 500,
+      "image": "https://i.ibb.co.com/bjg7BfdB/napa-extend-removebg-preview.png",
+      "manufacturer": "Beximco Pharma",
+      "isActive": true,
+      "categoryId": "625549a5-c9bd-4c5d-a016-c2ebc9101a33",
+      "category": {
+        "id": "625549a5-c9bd-4c5d-a016-c2ebc9101a33",
+        "categoryName": "Analgesic & Antipyretic",
+        "description": "Medications designed to relieve various types of pain and reduce fever.",
+        "createdAt": "2026-02-13T18:51:34.030Z",
+        "updatedAt": "2026-02-13T18:51:34.030Z"
+      },
+      "createdAt": "2026-02-13T18:58:23.887Z",
+      "updatedAt": "2026-02-13T19:08:47.320Z"
+    }
+  ]
+}
