@@ -4,6 +4,7 @@ import { mediService } from "@/services/medi.server";
 import { Medicine } from "@/types/medi.service";
 import { Category, categoryService } from "@/services/category.server";
 import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 import {
   Pagination,
   PaginationContent,
@@ -105,6 +106,16 @@ export default async function AllProductsPage({
   return (
     <main className="min-h-screen bg-[#f8fafc] pb-16 pt-28 dark:bg-black">
       <div className="container mx-auto px-4">
+        <div className="mb-5">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 rounded-lg px-1 py-2 text-sm font-semibold text-slate-600 transition-colors hover:text-blue-600 dark:text-slate-300 dark:hover:text-blue-400"
+          >
+            <ArrowLeft className="size-4" />
+            Back to Home
+          </Link>
+        </div>
+
         <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <h1 className="text-3xl font-extrabold text-slate-900 dark:text-white">All Products</h1>
