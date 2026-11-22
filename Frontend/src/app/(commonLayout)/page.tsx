@@ -6,26 +6,41 @@ import HeroMedicine from "@/components/layout/banner";
 import { Help1 } from "@/components/layout/help1";
 import { Logos8 } from "@/components/layout/logos8";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import HomeSections from "@/components/layout/HomeSections";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 
 export const dynamic = "force-dynamic";
+
+type HomeSearchParams = {
+  search?: string;
+  page?: string;
+};
 
 export default async function Home({
   searchParams,
 }: {
-  searchParams: Promise<{ search?: string }>;
+  searchParams: Promise<HomeSearchParams>;
 }) {
-  const { search } = await searchParams;
+  const params = await searchParams;
+  const search = params.search || "";
+  const requestedPage = Number.parseInt(params.page || "1", 10);
+  const currentPage = Number.isFinite(requestedPage) && requestedPage > 0 ? requestedPage : 1;
   const limit = 9;
 
   let medicines: Medicine[] = [];
-  let meta = { total: 0 };
+  let meta = { total: 0, totalPages: 0 };
   let catalogueError = false;
 
   try {
     const response = await mediService.getMedicines(
-      { search: search || "", page: 1, limit },
+      { search, page: currentPage, limit },
       { cache: "no-store" }
     );
 
@@ -51,8 +66,17 @@ export default async function Home({
     }
 
     medicines = medicineList;
-    const total = Number(payload?.meta?.total ?? payload?.data?.meta?.total);
-    meta.total = Number.isFinite(total) ? total : medicines.length;
+    const responseMeta = payload?.meta ?? payload?.data?.meta;
+    const total = Number(responseMeta?.total);
+    const totalPages = Number(responseMeta?.totalPages);
+    const resolvedTotal = Number.isFinite(total) ? total : medicines.length;
+    meta = {
+      total: resolvedTotal,
+      totalPages:
+        Number.isFinite(totalPages) && totalPages > 0
+          ? totalPages
+          : Math.ceil(resolvedTotal / limit),
+    };
   } catch (error) {
     catalogueError = true;
     console.error("Could not load medicine catalogue:", error);
@@ -66,7 +90,12 @@ export default async function Home({
     console.error("Could not load categories:", error);
   }
 
-  const allProductsHref = "/store" + (search ? "?search=" + encodeURIComponent(search) : "");
+  const createPageURL = (nextPage: number) => {
+    const query = new URLSearchParams();
+    if (search) query.set("search", search);
+    query.set("page", String(nextPage));
+    return "/?" + query.toString();
+  };
 
   return (
     <main className="min-h-screen bg-[#f8fafc] dark:bg-black">
@@ -81,7 +110,7 @@ export default async function Home({
         <section className="mt-8 w-full">
           <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
             <h2 className="text-xl font-bold text-slate-800 dark:text-slate-100">
-              {search ? "Products matching " + '"' + search + '"' : "Products"}
+              {search ? 'Products matching "' + search + '"' : "Products"}
             </h2>
             <span className="rounded-full bg-blue-50 px-4 py-1.5 text-sm font-bold text-blue-600 dark:bg-blue-900/20">
               {catalogueError ? "Catalogue unavailable" : meta.total + " items"}
@@ -98,11 +127,44 @@ export default async function Home({
               </p>
             </div>
           ) : medicines.length ? (
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {medicines.map((medicine) => (
-                <MediCards key={medicine.id} medicine={medicine} />
-              ))}
-            </div>
+            <>
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {medicines.map((medicine) => (
+                  <MediCards key={medicine.id} medicine={medicine} />
+                ))}
+              </div>
+
+              {meta.totalPages > 1 && (
+                <div className="mt-10">
+                  <Pagination>
+                    <PaginationContent>
+                      <PaginationItem>
+                        <PaginationPrevious
+                          href={currentPage > 1 ? createPageURL(currentPage - 1) : "#"}
+                          className={currentPage <= 1 ? "pointer-events-none opacity-50" : ""}
+                        />
+                      </PaginationItem>
+                      {Array.from({ length: meta.totalPages }, (_, index) => index + 1).map((pageNumber) => (
+                        <PaginationItem key={pageNumber}>
+                          <PaginationLink
+                            href={createPageURL(pageNumber)}
+                            isActive={pageNumber === currentPage}
+                          >
+                            {pageNumber}
+                          </PaginationLink>
+                        </PaginationItem>
+                      ))}
+                      <PaginationItem>
+                        <PaginationNext
+                          href={currentPage < meta.totalPages ? createPageURL(currentPage + 1) : "#"}
+                          className={currentPage >= meta.totalPages ? "pointer-events-none opacity-50" : ""}
+                        />
+                      </PaginationItem>
+                    </PaginationContent>
+                  </Pagination>
+                </div>
+              )}
+            </>
           ) : (
             <div className="rounded-3xl border-2 border-dashed border-slate-200 bg-white py-20 text-center dark:border-slate-800 dark:bg-slate-900">
               <p className="mb-4 text-lg italic text-slate-400">
@@ -116,16 +178,11 @@ export default async function Home({
             </div>
           )}
 
-          {!catalogueError && medicines.length > 0 && (
-            <div className="mt-8 flex justify-center">
-              <Link
-                href={allProductsHref}
-                className="inline-flex items-center gap-2 rounded-full bg-blue-600 px-6 py-3 text-sm font-bold text-white shadow-sm transition-colors hover:bg-blue-700"
-              >
-                View More Products <ArrowRight className="size-4" />
-              </Link>
-            </div>
-          )}
+          <div className="mt-6 text-center">
+            <Link href={"/store" + (search ? "?search=" + encodeURIComponent(search) : "")} className="text-sm font-semibold text-blue-600 hover:underline">
+              Browse full catalogue
+            </Link>
+          </div>
         </section>
       </div>
 
